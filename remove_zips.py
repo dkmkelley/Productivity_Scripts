@@ -3,11 +3,12 @@ import tkinter as tk
 from tkinter import filedialog, messagebox
 
 
+
 def remove_zips():
     root = tk.Tk()
     root.withdraw()
 
-    folder_path = filedialog.askdirectory(title="Select Folder to Clean")
+    folder_path = filedialog.askdirectory(title="Select Folder")
 
     if not folder_path:
         print("No folder selected. Exiting.")
