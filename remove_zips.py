@@ -26,7 +26,7 @@ def remove_zips():
         return
 
     max_display = 25
-    
+
     if len(zip_files_found) > max_display:
         displayed_files = zip_files_found[:max_display]
         file_list_str = "\n".join(displayed_files)
