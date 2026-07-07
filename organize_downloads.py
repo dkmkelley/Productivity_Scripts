@@ -4,16 +4,17 @@ import shutil
 folder_path = 'C:\\Users\\dkmkelley\\Downloads'
 
 file_types = {
-    'Images': ['.jpg', '.png', '.gif', '.jpeg', '.bmp', '.tif', '.tiff', '.webp'],
-    'Documents': ['.pdf', '.doc', '.docx', 'xlsx', '.txt', 'md',],
-    'Videos': ['.mp4', '.mkv', '.mov'],
-    'Music': ['.mp3', '.wav'],
-    'Archives': ['.zip', '.tar', '.gz', '.7z'],
-    'Executables': ['.exe', '.bat', '.sh'],
     '3D Print Files': ['.stl', '.3mf', '.blend', '.blend1'],
-    'Disk Images': ['.img', '.iso']
+    'Archives': ['.zip', '.tar', '.gz', '.7z'],
+    'Disk Images': ['.img', '.iso'],
+    'Documents': ['.pdf', '.doc', '.docx', 'xlsx', '.txt', 'md',],
+    'Executables': ['.exe', '.bat', '.sh'],
+    'Images': ['.jpg', '.png', '.gif', '.jpeg', '.bmp', '.tif', '.tiff', '.webp'],
+    'Videos': ['.mp4', '.mkv', '.mov'],
+    'Music': ['.mp3', '.wav']
 }
-
+    
+    
 def organize_folder():
     for filename in os.listdir(folder_path):
         file_ext = os.path.splitext(filename)[1].lower()
