@@ -16,16 +16,22 @@ file_types = {
     
     
 def organize_folder():
-    for filename in os.listdir(folder_path):
-        file_ext = os.path.splitext(filename)[1].lower()
-        for folder, extensions in file_types.items():
-            if file_ext in extensions:
-                new_folder_path = os.path.join(folder_path, folder)
-                if not os.path.exists(new_folder_path):
-                    os.makedirs(new_folder_path)
-                shutil.move(os.path.join(folder_path, filename), new_folder_path)
-                print(f'Moved: {filename} -> {folder}')
-                break
+    for root, _, files in os.walk(folder_path):
+        for filename in files:
+            file_path = os.path.join(root, filename)
+            file_ext = os.path.splitext(filename)[1].lower()
+            for folder, extensions in file_types.items():
+                if file_ext in extensions:
+                    new_folder_path = os.path.join(folder_path, folder)
+
+                    if os.path.commonpath([file_path, new_folder_path]) == new_folder_path:
+                        break
+
+                    if not os.path.exists(new_folder_path):
+                        os.makedirs(new_folder_path)
+                    shutil.move(file_path, new_folder_path)
+                    print(f'Moved: {filename} -> {folder}')
+                    break
 
 organize_folder()
 os.system('pause')
