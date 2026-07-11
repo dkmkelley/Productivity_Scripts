@@ -15,6 +15,18 @@ file_types = {
 }
     
     
+def _get_unique_destination(target_dir, filename):
+    base_name, extension = os.path.splitext(filename)
+    candidate = filename
+    counter = 1
+
+    while os.path.exists(os.path.join(target_dir, candidate)):
+        candidate = f"{base_name} ({counter}){extension}"
+        counter += 1
+
+    return os.path.join(target_dir, candidate)
+
+
 def organize_folder():
     for root, _, files in os.walk(folder_path):
         for filename in files:
@@ -29,8 +41,10 @@ def organize_folder():
 
                     if not os.path.exists(new_folder_path):
                         os.makedirs(new_folder_path)
-                    shutil.move(file_path, new_folder_path)
-                    print(f'Moved: {filename} -> {folder}')
+
+                    destination_path = _get_unique_destination(new_folder_path, filename)
+                    shutil.move(file_path, destination_path)
+                    print(f"Moved: {filename} -> {os.path.basename(destination_path)} in {folder}")
                     break
 
 organize_folder()
