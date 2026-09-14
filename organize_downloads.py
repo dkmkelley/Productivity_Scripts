@@ -52,8 +52,8 @@ def main():
     args = parser.parse_args()
 
     if not os.path.isdir(args.target_folder):
-            print(f"Error: '{args.target_folder}' is not a valid directory.")
-            return
+        print(f"Error: '{args.target_folder}' is not a valid directory.")
+        return
     
     organize_folder(args.target_folder)
     input("Press Enter to exit...")
