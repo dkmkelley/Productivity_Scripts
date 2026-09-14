@@ -1,13 +1,12 @@
 import os
 import shutil
-
-folder_path = 'C:\\Users\\dkmkelley\\Downloads'
+import argparse
 
 file_types = {
     '3D Print Files': ['.stl', '.3mf', '.blend', '.blend1'],
     'Archives': ['.zip', '.tar', '.gz', '.7z'],
     'Disk Images': ['.img', '.iso'],
-    'Documents': ['.pdf', '.doc', '.docx', 'xlsx', '.txt', 'md',],
+    'Documents': ['.pdf', '.doc', '.docx', '.xlsx', '.txt', '.md',],
     'Executables': ['.exe', '.bat', '.sh'],
     'Images': ['.jpg', '.png', '.gif', '.jpeg', '.bmp', '.tif', '.tiff', '.webp'],
     'Videos': ['.mp4', '.mkv', '.mov'],
@@ -27,7 +26,7 @@ def _get_unique_destination(target_dir, filename):
     return os.path.join(target_dir, candidate)
 
 
-def organize_folder():
+def organize_folder(folder_path):
     for root, _, files in os.walk(folder_path):
         for filename in files:
             file_path = os.path.join(root, filename)
@@ -47,5 +46,17 @@ def organize_folder():
                     print(f"Moved: {filename} -> {os.path.basename(destination_path)} in {folder}")
                     break
 
-organize_folder()
-os.system('pause')
+def main():
+    parser = argparse.ArgumentParser(description='Sort files in a folder by type')
+    parser.add_argument("target_folder", help="The folder to organize")
+    args = parser.parse_args()
+
+    if not os.path.isdir(args.target_folder):
+            print(f"Error: '{args.target_folder}' is not a valid directory.")
+            return
+    
+    organize_folder(args.target_folder)
+    input("Press Enter to exit...")
+
+if __name__ == "__main__":
+    main()
